@@ -7,6 +7,13 @@ edition = "2021"
 
 [dependencies]
 futures = "0.3.29"
-ntex = { version = "0.7.9", features = ["tokio"] }
+ntex = { version = "*", features = ["tokio"] }
+ntex-io = { version = "*" }
+ntex-tokio = { version = "*" }
 tokio = { version = "1.34.0", features = ["fs"] }
 tokio-util = { version = "0.7.9", features = ["codec"] }
+
+[patch.crates-io]
+ntex = { git = "https://github.com/ntex-rs/ntex", branch = "master" }
+ntex-io = { git = "https://github.com/ntex-rs/ntex", branch = "master" }
+ntex-tokio = { git = "https://github.com/ntex-rs/ntex", branch = "master" }

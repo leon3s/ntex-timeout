@@ -3,12 +3,12 @@ use std::io::Write;
 use ntex::web;
 use futures::StreamExt;
 
-#[web::post("/import")]
+#[web::post("/import/{name}")]
 pub(crate) async fn import(
   mut payload: web::types::Payload,
-  path: web::types::Path<(String, String)>,
+  path: web::types::Path<String>,
 ) -> web::HttpResponse {
-  let name = path.1.to_owned();
+  let name = path.to_owned();
   let vm_images_dir = "/tmp".to_owned();
   let filepath = format!("{vm_images_dir}/{name}.img");
   let fp = filepath.clone();
@@ -77,7 +77,7 @@ mod tests {
       });
 
     client
-      .post("/import")
+      .post("/import/test")
       .send_stream(byte_stream)
       .await
       .unwrap();
